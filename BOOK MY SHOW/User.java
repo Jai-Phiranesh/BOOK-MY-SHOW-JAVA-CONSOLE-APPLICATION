@@ -11,9 +11,10 @@ public class User {
     }
 
 
-    public User(String id,String pass){
+    public User(String id,String pass,String location){
         this.userid=id;
         this.password=pass;
+        this.location=location;
     }
 
     public User(){
