@@ -1,7 +1,8 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class BookMyShowactions {
-    public static void start() {
+    public static void start() throws ParseException {
         Scanner scanner = new Scanner(System.in);
         BookMyShow.getAdminlist().add(new Admin("1", "1"));
 
@@ -38,7 +39,7 @@ public class BookMyShowactions {
                         } else if (result.getUserid() == null) {
                             System.out.println("Wrong password:");
                         } else {
-                            UserActions.displayallMovies(scanner,result);
+                            UserActions.operations(scanner, result);
                         }       break;
                     }
                 case "3":
