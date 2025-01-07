@@ -1,3 +1,5 @@
+
+
 public class User {
     private String userid;
     private String password;
@@ -27,7 +29,4 @@ public class User {
 
     public String getUserid() {
         return userid;
-    }
-
-
-}
+}}

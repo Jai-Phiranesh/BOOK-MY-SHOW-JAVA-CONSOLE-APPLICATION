@@ -1,13 +1,15 @@
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Screen {
-    private String name;
+     private String name;
     private long numberofseats;
-
+    private ArrayList<Show> shows=new ArrayList<>();
     private  HashMap<Character, ArrayList<String>> seatarrangement = new HashMap<>();
-
+   
+    public ArrayList<Show> getShows() {
+        return shows;
+    }
     public  HashMap<Character, ArrayList<String>> getSeatarrangement() {
         return seatarrangement;
     }
@@ -26,5 +28,4 @@ public class Screen {
     public String getName() {
         return name;
     }
-
 }

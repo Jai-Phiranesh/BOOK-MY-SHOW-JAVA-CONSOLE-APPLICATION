@@ -1,20 +1,11 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class BookMyShow {
     private static ArrayList<Admin> adminlist=new ArrayList<Admin>();
     private static ArrayList<User> useList=new ArrayList<User>();
-    private static HashMap<String, ArrayList<Theatre>> locationtheatre = new HashMap<>();
-    private static HashMap<String, ArrayList<Movies>> locationmovie = new HashMap<>();
-    public static Object getLocationmovie;
-
-public static HashMap<String, ArrayList<Movies>> getLocationmovie() {
-    return locationmovie;
-}
-
-    public static HashMap<String, ArrayList<Theatre>> getLocationtheatre() {
-        return locationtheatre;
-    }
+   
+    private static HashMap<String, Theatre> theatreandtheatreobj = new HashMap<>();
+    private static HashMap<String, Movies> movieandmovieobj = new HashMap<>();
 
     public static ArrayList<Admin> getAdminlist() {
         return adminlist;
@@ -22,6 +13,13 @@ public static HashMap<String, ArrayList<Movies>> getLocationmovie() {
 
     public static ArrayList<User> getUseList() {
         return useList;
+    }
+
+    public static HashMap<String, Movies> getMovieandmovieobj() {
+        return movieandmovieobj;
+    }
+    public static HashMap<String, Theatre> getTheatreandtheatreobj() {
+        return theatreandtheatreobj;
     }
     
 }

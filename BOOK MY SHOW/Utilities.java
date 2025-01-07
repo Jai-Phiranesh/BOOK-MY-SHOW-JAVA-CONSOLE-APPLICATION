@@ -1,9 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Utilities {
+    private static DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static LocalDate today = LocalDate.now();
+    private static DateTimeFormatter timeformatter=DateTimeFormatter.ofPattern("HH:mm");
 
-    public static HashMap<Character, ArrayList<String>> generateGrid(long numberofseats, String grid) {
+    public static DateTimeFormatter getTimeformatter() {
+        return timeformatter;
+    }
+    public static LocalDate getToday() {
+        return today;
+    }
+    
+    public static DateTimeFormatter getFormatter() {
+        return formatter;
+    }
+
+public static HashMap<Character, ArrayList<String>> generateGrid(long numberofseats, String grid) {
         var starremoved = grid.split("\\*");
         long sum = 0;
 
@@ -55,6 +71,4 @@ public class Utilities {
         System.out.println("Enter the correct number of seats:");
         return null;
     }
-
-   
 }

@@ -1,11 +1,8 @@
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Date;
 import java.util.Scanner;
 
 public class UserActions {
-
+    public static Scanner scanner=new Scanner(System.in);
     public static User login(Scanner scanner) {
         System.out.print("Enter The Username:");
         String userinput = scanner.nextLine();
@@ -25,7 +22,7 @@ public class UserActions {
     }
 
     public static void register(Scanner scanner) {
-        System.out.println("NO USER FOUND YOU LIKE TO Register (Y/N):");
+        System.out.print("NO USER FOUND YOU LIKE TO Register (Y/N):");
         String yesorno1 = scanner.nextLine();
         if (yesorno1.toLowerCase().equals("y")) {
             System.out.print("Enter username:");
@@ -34,7 +31,7 @@ public class UserActions {
             String password = scanner.nextLine();
             System.out.print("Enter Your Location:");
             String userlocation = scanner.nextLine();
-            System.out.print("ARE YOU SURE TO REGISTER (Y/N).....");
+            System.out.print("ARE YOU SURE TO REGISTER (Y/N):");
             String yesorno = scanner.nextLine();
             if (yesorno.toLowerCase().equals("y")) {
                 BookMyShow.getUseList().add(new User(useridinput, password, userlocation));
@@ -46,63 +43,63 @@ public class UserActions {
         }
     }
 
-    public static void operations(Scanner scanner, User currentuser) {
+    public static void operations( User currentuser) {
+        
+        UserActions.displayallMovies( currentuser,Utilities.getToday());
 
         while (true) {
-            UserActions.displayallMovies(scanner, currentuser);
+            System.out.println("---------------------------------------------------------"+"\n");
             System.out.println("Enter The User Choice...");
-            System.out.println("\n1.Change Location \n2.Add\nExit ");
+            System.out.println("------------- 1.Change Location---------------- 2.Change Date 3.        ---------4.Exit ");
             System.out.print("Enter the choice...");
             String choice = scanner.nextLine();
+            System.out.println("---------------------------------------------------------"+"\n");
             switch (choice) {
 
                 case "1":
-                    UserActions.changeLocation(scanner, currentuser);
+                    UserActions.changeLocation( currentuser);
                     break;
                 case "2":
-                    AdminActions.addTheatre(scanner);
+                    UserActions.changeDate(currentuser);
+                    break;
+                case "3":
+                break;
                 case "exit":
                     return;
             }
         }
     }
 
-    public static void changeLocation(Scanner scanner, User currentuserob) {
-        System.out.println("Available Locations Are:");
-        for (var location : BookMyShow.getLocationtheatre().entrySet()) {
-            System.out.println(location.getKey());
+    public static void displayallMovies( User ob,LocalDate today) {
+        System.out.println("movies in your location are.");
+        String userlocaton=ob.getLocation();
+        for(var movies:BookMyShow.getMovieandmovieobj().keySet()){
+            var movieobject=BookMyShow.getMovieandmovieobj().get(movies);
+            if(movieobject.getLocation().equals(userlocaton)&& (movieobject.getStartdate().isEqual(today))){
+            System.out.println(movies);}
         }
-        System.out.println("Enter The Location To Change:");
+        
+
+    }
+
+    public static void changeLocation( User currentuserob) {
+
+        System.out.print("Enter The Location To Change:");
         String locationtochange = scanner.nextLine();
-        if (BookMyShow.getLocationtheatre().containsKey(locationtochange)) {
-            currentuserob.setLocation(locationtochange);
-            displayallMovies(scanner, currentuserob);
-        } else {
-            System.out.println("Enter The Correct Location Your Loaction Is Still" + currentuserob.getLocation());
-        }
-    }
 
-    public static void displayallMovies(Scanner scanner, User ob) {
-        System.out.println("Movies In Your Locations are");
-        var locationMovies = BookMyShow.getLocationmovie().get(ob.getLocation());
-        if (locationMovies != null) {
-            for (var temp : locationMovies) {
-
-                LocalDate today = LocalDate.now();
-                for (Date temp1 : temp.getMoviedate()) {
-                    LocalDate movieDate = temp1.toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate();// java utill date to java time
-                    if (today.isEqual(movieDate)) {
-                        System.out.println(temp.getName());
-                    }
-
-                }
-
-            }
-        } else {
-            System.out.println("No Movies In Your Location....");
-        }
+        currentuserob.setLocation(locationtochange);
+        displayallMovies( currentuserob,Utilities.getToday());
+        
 
     }
+
+    public static void changeDate( User currentuserob) {
+
+         System.out.print("Enter The date To Change:");
+        LocalDate dateupdate = LocalDate.parse(scanner.nextLine(),Utilities.getFormatter());
+        
+        displayallMovies(currentuserob,dateupdate);
+
+    }
+
 }
