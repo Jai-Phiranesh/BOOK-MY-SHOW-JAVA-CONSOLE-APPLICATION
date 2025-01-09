@@ -24,30 +24,30 @@ public class BookMyShowaction {
                 case "1"://for admin login
                     {
                         Admin result = AdminAction.login();
-                        if (result == null) {
+                        if (result == null) {//no account
                             System.out.println("INVALID ADMIN DETAILS:");
-                        } else if (result.getUserid() == null) {
+                        } else if (result.getUserid() == null) {//password attempts reached
                             System.out.println("Wrong password:");
                         } else {
-                            AdminAction.operations( result);
+                            AdminAction.operations( result);//success of login
                         }       break;
                     }
-                case "2":
+                case "2"://user login
                     {
                         User result = UserActions.login(scanner);
-                        if (result == null) {
+                        if (result == null) {//no account
                             UserActions.register(scanner);
                             
-                        } else if (result.getUserid() == null) {
+                        } else if (result.getUserid() == null) {//password attempts reached
                             System.out.println("Wrong password:");
                         } else {
-                            UserActions.operations( result);
+                            UserActions.operations( result);//success of login
                         }       break;
                     }
                 case "3":
-                    break OUTER;
+                    break OUTER;//to exit the app
                 default:
-                    System.out.println("INVALID DETAILS");
+                    System.out.println("INVALID DETAILS");//except the valid input
                     break;
             }
         }

@@ -74,10 +74,13 @@ public class UserActions {
         System.out.println("movies in your location are.");
         String userlocaton=ob.getLocation();
         for(var movies:BookMyShow.getMovieandmovieobj().keySet()){
-            var movieobject=BookMyShow.getMovieandmovieobj().get(movies);
+            var moviesarraylist=BookMyShow.getMovieandmovieobj().get(movies);
+            for(var movieobject:moviesarraylist){
             if(movieobject.getLocation().equals(userlocaton)&& (movieobject.getStartdate().isEqual(today))){
             System.out.println(movies);}
-        }
+            }}
+            System.out.println("Enter the movie name to book:");
+            String movieChoice=scanner.nextLine();
         
 
     }
