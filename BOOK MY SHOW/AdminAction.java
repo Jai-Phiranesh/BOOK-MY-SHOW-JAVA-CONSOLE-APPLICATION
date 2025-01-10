@@ -119,10 +119,7 @@ public class AdminAction {
                 if (screen.equals(choicescreen)) {
                     currentscreen = currenttheatre.getScreennameandobj().get(screen);
                     break;
-                } else {
-                    System.out.println("Incorrect screen name...");//else ask user to enter again
-                    continue;
-                }
+                } 
             }
 
             System.out.print("Enter The Show start time(HH:mm): ");//get the show start time
@@ -134,9 +131,10 @@ public class AdminAction {
             Show currentshow = null;//store current show
             if (currentscreen.getShows().isEmpty()) {//if show class is empty add directly
                 currentshow = new Show(choicestarttime, choicestarttime.plusMinutes(choiceduration + 30),
-                        datestart, moviename);
+                        datestart, moviename,currentscreen);
                 currentscreen.getShows().add(currentshow);
-                BookMyShow.getMovieandmovieobj().put(moviename, new ArrayList<Movies>());
+                if(!BookMyShow.getMovieandmovieobj().containsKey(moviename)){
+                BookMyShow.getMovieandmovieobj().put(moviename, new ArrayList<Movies>());}
                 BookMyShow.getMovieandmovieobj().get(moviename).add(new Movies(moviename, movielocation, datestart,
                         choiceduration, currenttheatre, currentscreen, currentshow));
                 System.out.println("added successfully");
@@ -149,14 +147,14 @@ public class AdminAction {
                     if ((choicestarttime.isBefore(shows.getStarttime()) || choicestarttime.isAfter(shows.getEndtime()))
                             && (endTime.isBefore(shows.getStarttime()) || endTime.isAfter(shows.getEndtime()))) {//check the show given as input is valid or not by comparing to old show timings
                         currentshow = new Show(choicestarttime, choicestarttime.plusMinutes(choiceduration + 30),
-                                datestart, moviename);//store in the show object
+                                datestart, moviename,currentscreen);//store in the show object
                                 if (currentscreen.getShows().contains(currentshow)) {
                                     System.out.println("Show already Exists");
                                     return;
                 
                                 }//check the same show (start time and end time  and date already exists )
                         currentscreen.getShows().add(currentshow);
-                        BookMyShow.getMovieandmovieobj().put(moviename, new ArrayList<Movies>());
+                        
                         BookMyShow.getMovieandmovieobj().get(moviename)//if all the condition is true add the movie and show object
                                 .add(new Movies(moviename, movielocation, datestart,
                                         choiceduration, currenttheatre, currentscreen, currentshow));

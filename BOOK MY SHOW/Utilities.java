@@ -7,6 +7,7 @@ public class Utilities {
     private static DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");//date formatter
     private static LocalDate today = LocalDate.now();//to get current date
     private static DateTimeFormatter timeformatter=DateTimeFormatter.ofPattern("HH:mm");//time formatter
+    
 
     public static DateTimeFormatter getTimeformatter() {//getters
         return timeformatter;
@@ -71,4 +72,7 @@ public static HashMap<Character, ArrayList<String>> generateGrid(long numberofse
         System.out.println("Enter the correct number of seats:");
         return null;//for wrong number like 152
     }
+
+
+
 }

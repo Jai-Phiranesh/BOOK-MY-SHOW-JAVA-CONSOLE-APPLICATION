@@ -10,16 +10,19 @@ public class Show  {//show pojo class
 
     private LocalDate showDate;//show date
     private String moviename;//name of the movie in that time
+    private Screen screen;
 
 
-    public Show(LocalTime starttime,LocalTime endttime,LocalDate showDate,String moviename){
+    public Show(LocalTime starttime,LocalTime endttime,LocalDate showDate,String moviename,Screen screenob){
 
         this.starttime=starttime;
         this.endtime=endttime;
         this.showDate=showDate;
         this.moviename=moviename;
+        this.screen=screenob;
 
     }
+
 
     public String getMoviename() {
         return moviename;
@@ -32,6 +35,9 @@ public class Show  {//show pojo class
         return starttime;
     }//getters
    
+    public Screen getScreen() {
+        return screen;
+    }//getters
 
     public LocalDate getShowDate() {
         return showDate;
@@ -59,6 +65,12 @@ public class Show  {//show pojo class
         
         return Objects.hash(starttime,endtime,showDate);
     }//generate hashcode for the fiven object
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return starttime.toString()+"-"+endtime.toString();
+    }
 
 
 
