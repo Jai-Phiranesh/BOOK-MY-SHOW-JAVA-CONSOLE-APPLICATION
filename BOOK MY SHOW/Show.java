@@ -7,20 +7,26 @@ public class Show  {//show pojo class
     private LocalTime endtime;//endtime of show
    
 
-
+    private long price;
     private LocalDate showDate;//show date
     private String moviename;//name of the movie in that time
     private Screen screen;
 
 
-    public Show(LocalTime starttime,LocalTime endttime,LocalDate showDate,String moviename,Screen screenob){
+    public Show(LocalTime starttime,LocalTime endttime,LocalDate showDate,String moviename,Screen screenob,long price){
 
         this.starttime=starttime;
         this.endtime=endttime;
         this.showDate=showDate;
         this.moviename=moviename;
         this.screen=screenob;
+        this.price=price;
 
+    }
+
+
+    public long getPrice() {
+        return price;
     }
 
 
@@ -59,6 +65,8 @@ public class Show  {//show pojo class
         Show shows =(Show)obj;
         return Objects.equals(this.starttime,shows.starttime)&&Objects.equals(this.endtime, shows.endtime)&&Objects.equals(this.showDate, shows.showDate);//for same timing of the show 
     }
+
+    
 
     @Override
     public int hashCode() {//Object method overrided

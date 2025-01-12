@@ -128,10 +128,15 @@ public class AdminAction {
             System.out.print("Enter The Duration of movie:");
             long choiceduration = Long.parseLong(scanner.nextLine());//get the duration of the movie
             var endTime = choicestarttime.plusMinutes(choiceduration + 30);//end time is starttime +duration and 30 minutes for the intervel
+            System.out.print("Enter the price for the Show:");
+            long price=Long.parseLong(scanner.nextLine());
+
             Show currentshow = null;//store current show
+
+
             if (currentscreen.getShows().isEmpty()) {//if show class is empty add directly
                 currentshow = new Show(choicestarttime, choicestarttime.plusMinutes(choiceduration + 30),
-                        datestart, moviename,currentscreen);
+                        datestart, moviename,currentscreen,price);
                 currentscreen.getShows().add(currentshow);
                 if(!BookMyShow.getMovieandmovieobj().containsKey(moviename)){
                 BookMyShow.getMovieandmovieobj().put(moviename, new ArrayList<Movies>());}
@@ -147,7 +152,7 @@ public class AdminAction {
                     if ((choicestarttime.isBefore(shows.getStarttime()) || choicestarttime.isAfter(shows.getEndtime()))
                             && (endTime.isBefore(shows.getStarttime()) || endTime.isAfter(shows.getEndtime()))) {//check the show given as input is valid or not by comparing to old show timings
                         currentshow = new Show(choicestarttime, choicestarttime.plusMinutes(choiceduration + 30),
-                                datestart, moviename,currentscreen);//store in the show object
+                                datestart, moviename,currentscreen,price);//store in the show object
                                 if (currentscreen.getShows().contains(currentshow)) {
                                     System.out.println("Show already Exists");
                                     return;
@@ -254,12 +259,15 @@ public class AdminAction {
 
             System.out.println("Theatre Name is.." + theatre.getTheatername());//print all deatails of theatre
             System.out.println("Theatre Location is.." + theatre.getLocation());
+            
             System.out.println("screens are ");
             for (var temp1 : theatre.getScreennameandobj().entrySet()) {
                 System.out.println("---------------------------------------------------------\n");
                 System.out.println("Screen Name:" + temp1.getKey());
                 System.out.println("Number of seats:" + temp1.getValue().getNumberofseats());
                 System.out.println("Screen pattern:" + temp1.getValue().getSeatarrangement());
+                System.out.println(temp1.getValue().getAvailableseats());
+               
 
             }
         }

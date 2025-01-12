@@ -1,10 +1,16 @@
-
+import java.util.ArrayList;
 
 public class User {//USer pojo class
     private String userid;//user id
     private String password;//user pass
     private String location;//user location
+    private ArrayList<Ticket>tickets=new ArrayList<>();
 
+
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
     public String getLocation() {//getters
         return location;
     }
@@ -17,6 +23,7 @@ public class User {//USer pojo class
         this.userid=id;
         this.password=pass;
         this.location=location;
+        
     }
 
     public User(){//constructor for creating object without parameter
