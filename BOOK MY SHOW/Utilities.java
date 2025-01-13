@@ -65,7 +65,7 @@ public static HashMap<Character, ArrayList<String>> generateGrid(long numberofse
             
             
 
-            return hashmap;
+            return hashmap;//return the seat grid
         }
 
         

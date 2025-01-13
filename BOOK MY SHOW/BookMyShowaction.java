@@ -2,8 +2,9 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class BookMyShowaction {
+    public static Scanner scanner = new Scanner(System.in);
     public static void start() throws ParseException {
-        Scanner scanner = new Scanner(System.in);//scanner object
+     
         BookMyShow.getAdminlist().add(new Admin("1", "1"));//added the default admin pass and id to admin list
 
         System.out.println("-------------------------");
@@ -34,9 +35,9 @@ public class BookMyShowaction {
                     }
                 case "2"://user login
                     {
-                        User result = UserActions.login(scanner);
+                        User result = UserActions.login();
                         if (result == null) {//no account
-                            UserActions.register(scanner);
+                            UserActions.register();
                             
                         } else if (result.getUserid() == null) {//password attempts reached
                             System.out.println("Wrong password:");

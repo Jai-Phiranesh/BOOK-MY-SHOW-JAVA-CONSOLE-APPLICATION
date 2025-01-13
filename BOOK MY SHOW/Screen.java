@@ -7,6 +7,7 @@ public class Screen {
     private long numberofseats;//number of seats in that screen
     private long availableseats=numberofseats;
     private HashSet<Show> shows = new HashSet<Show>();//show arraylist stores all the show object of that screen
+    private String grid;
 
 
     public void setAvailableseats(long availableseats) {
@@ -25,16 +26,20 @@ public class Screen {
         return seatarrangement;
     }//getters
 
-    public Screen(String name, long numberofseats, HashMap<Character, ArrayList<String>> seats) {
+    public Screen(String name, long numberofseats, HashMap<Character, ArrayList<String>> seats,String grid) {
         this.name = name;
         this.numberofseats = numberofseats;
         this.seatarrangement = seats;
         this.availableseats=numberofseats;
+        this.grid=grid;
     }//constructors Screen to initialize fields of the class
 
     public long getNumberofseats() {
         return numberofseats;
     }//getters
+    public String getGrid() {
+        return grid;
+    }
 
    
     public String getName() {

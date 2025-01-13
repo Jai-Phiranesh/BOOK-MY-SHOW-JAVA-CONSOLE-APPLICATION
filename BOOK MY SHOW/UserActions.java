@@ -8,49 +8,49 @@ import java.util.Scanner;
 public class UserActions {
     public static Scanner scanner = new Scanner(System.in);
 
-    public static User login(Scanner scanner) {
+    public static User login() {//perform the login action of the user
         System.out.print("Enter The Username:");
-        String userinput = scanner.nextLine();
+        String userinput = scanner.nextLine();//get user name
         System.out.print("Enter The Password:");
-        String passwordinput = scanner.nextLine();
-        for (User temp : BookMyShow.getUseList()) {
-            if (temp.getUserid().equals(userinput)) {
+        String passwordinput = scanner.nextLine();//grt password
+        for (User temp : BookMyShow.getUseList()) {//get user arraylist
+            if (temp.getUserid().equals(userinput)) {//check every object id and pass
                 if (temp.getPassword().equals(passwordinput)) {
-                    return temp;
+                    return temp;//if matches return the current user object
                 } else {
-                    return new User(null, null, null);
+                    return new User(null, null, null);//for wrong pass return object with null values
                 }
             }
 
         }
-        return null;
+        return null;//no account pass null
     }
 
-    public static void register(Scanner scanner) {
-        System.out.print("NO USER FOUND YOU LIKE TO Register (Y/N):");
+    public static void register() {//if no account the function is called
+        System.out.print("NO USER FOUND YOU LIKE TO Register (Y/N):");//conformation to get into register
         String yesorno1 = scanner.nextLine();
-        if (yesorno1.toLowerCase().equals("y")) {
+        if (yesorno1.toLowerCase().equals("y")) {//check input
             System.out.print("Enter username:");
-            String useridinput = scanner.nextLine();
+            String useridinput = scanner.nextLine();//get user name
             System.out.print("Enter password:");
-            String password = scanner.nextLine();
+            String password = scanner.nextLine();//get password
             System.out.print("Enter Your Location:");
-            String userlocation = scanner.nextLine();
-            System.out.print("ARE YOU SURE TO REGISTER (Y/N):");
+            String userlocation = scanner.nextLine();//get locatiom
+            System.out.print("ARE YOU SURE TO REGISTER (Y/N):");//ask conformation to register with this detatils
             String yesorno = scanner.nextLine();
             if (yesorno.toLowerCase().equals("y")) {
-                BookMyShow.getUseList().add(new User(useridinput, password, userlocation));
+                BookMyShow.getUseList().add(new User(useridinput, password, userlocation));//if yes add in array list with new object with this input fields
             } else if (yesorno.toLowerCase().equals("n")) {
-                return;
+                return;//else return
             }
         } else if (yesorno1.equals("n") || yesorno1.equals("N")) {
-            return;
+            return;//if n return to previous features
         }
     }
 
     public static void operations(User currentuser) {
 
-        UserActions.displayallMovies(currentuser, Utilities.getToday());
+        UserActions.displayallMovies(currentuser, Utilities.getToday());//very bigning of the login show the movies
 
         while (true) {
             System.out.println("---------------------------------------------------------" + "\n");
@@ -62,58 +62,58 @@ public class UserActions {
             System.out.println("---------------------------------------------------------" + "\n");
             switch (choice) {
 
-                case "1":
+                case "1"://based on the choice call the function (1)
                     UserActions.changeLocation(currentuser);
-                    UserActions.displayallMovies(currentuser, Utilities.getToday());
+                    UserActions.displayallMovies(currentuser, Utilities.getToday());//after the change in the location show the movies 
                     break;
-                case "2":
+                case "2"://based on the choice call the function (2)
                     LocalDate dateupdate=UserActions.changeDate(currentuser);
-                    UserActions.displayallMovies(currentuser, dateupdate);
+                    UserActions.displayallMovies(currentuser, dateupdate);//after the change in the date show the movies 
                     break;
-                case "3":
+                case "3"://based on the choice call the function (3)
                     UserActions.viewtickets(currentuser);
                     break;
-                case "4":
+                case "4"://exit the function and go to previous fumvtion
                     return;
             }
         }
     }
 
-    public static void displayallMovies(User ob, LocalDate today) {
+    public static void displayallMovies(User ob, LocalDate today) {//display movies based on users location and date
        
-        HashSet<String> moviesinthatlocation = new HashSet<>();
-        ArrayList<Movies> moviesavailable = new ArrayList<>();
+        HashSet<String> moviesinthatlocation = new HashSet<>();//to store the movies in that location
+        ArrayList<Movies> moviesavailable = new ArrayList<>();//to store the every object of the particulat movie of the user entered
         if(BookMyShow.getMovieandmovieobj().keySet().isEmpty()){
             System.out.println("\n"+"No movies in your location or date try some other date or location"+"\n");
                 return;
-        }
+        }//to check for no movies in entire app
 
         for (var movies : BookMyShow.getMovieandmovieobj().keySet()) {
             boolean check = false;
             var moviesarraylist = BookMyShow.getMovieandmovieobj().get(movies);
             for (var movieobject : moviesarraylist) {
-                if (movieobject.getLocation().equals(ob.getLocation()) && (movieobject.getStartdate().isEqual(today))) {
+                if (movieobject.getLocation().equals(ob.getLocation()) && (movieobject.getStartdate().isEqual(today))) {//check and display the movies based on the location and date
                     check = true;
 
                 }
 
             }
-            if (check) {
+            if (check) {//to check the movies and print the movie only availabe in that location and date
                 System.out.println("->" + movies);
                 moviesinthatlocation.add(movies);
             }
-            else{
+            else{//to print no movies in that location or date
                 System.out.println("\n"+"No movies in your location or date try some other date or location"+"\n");
                 return;
             }
 
         }
         System.out.print("Enter the movie name to book or press (n) to exit the option:");
-        String movieChoice = scanner.nextLine();
-        if (moviesinthatlocation.contains(movieChoice)) {
+        String movieChoice = scanner.nextLine();//get the movie name to book
+        if (moviesinthatlocation.contains(movieChoice)) {//if movie entered bye the user exists
             for (var movieobject : BookMyShow.getMovieandmovieobj().get(movieChoice)) {
                 if (movieobject.getLocation().equals(ob.getLocation()) && (movieobject.getStartdate().isEqual(today))) {
-                    moviesavailable.add(movieobject);
+                    moviesavailable.add(movieobject);//add all the movie object in arraylist
                 }
 
             }
@@ -129,7 +129,7 @@ public class UserActions {
             return;
         }
 
-        showmovies(moviesavailable, movieChoice,ob);
+        showmovies(moviesavailable, movieChoice,ob);//pass the movie object,current user, finally movie name
 
     }
 
@@ -137,39 +137,46 @@ public class UserActions {
         System.out.println("\n" +
                 "---------------------------------------------------------") ;
         System.out.println("Movie:" + moviechoice);
-        System.out.println("\n" +
+        System.out.println("\n" +//print movie name
                 "---------------------------------------------------------" );
-        HashMap<String, HashSet<Show>> theatreAgainstShow = new HashMap<>();
-        for (var currentMovie : movieavailable) {
+        HashMap<String, HashSet<Show>> theatreAgainstShow = new HashMap<>();//to reduce the time consuming process to prirnt the teatre name show alone
+        for (var currentMovie : movieavailable) {//print all the movie object fields which is enterd by the user(only the usesr location and date)
 
-            if (theatreAgainstShow.containsKey(currentMovie.getTheatreob().getTheatername())) {
-                theatreAgainstShow.get(currentMovie.getTheatreob().getTheatername()).add(currentMovie.getShowob());
+            if (theatreAgainstShow.containsKey(currentMovie.getTheatreob().getTheatername())) {//if theatre name already exists
+                theatreAgainstShow.get(currentMovie.getTheatreob().getTheatername()).add(currentMovie.getShowob());//add the show object
             } else {
-                HashSet<Show> show = new HashSet<>();
-                show.add(currentMovie.getShowob());
-                theatreAgainstShow.put(currentMovie.getTheatreob().getTheatername(), show);
+                HashSet<Show> show = new HashSet<>();//creat new hash set
+                show.add(currentMovie.getShowob());//add to hash set
+                theatreAgainstShow.put(currentMovie.getTheatreob().getTheatername(), show);//add to hashmap
             }
         }
 
         for (String keytheatrename : theatreAgainstShow.keySet()) {
-            System.out.println("Theatre:" + keytheatrename);
+            System.out.println("Theatre:" + keytheatrename);//print theatre name
             System.out.println("\n" +
                 "---------------------------------------------------------") ;
-            System.out.println("shows are:" + theatreAgainstShow.get(keytheatrename).toString());
+            System.out.println("shows are:" + theatreAgainstShow.get(keytheatrename).toString());//print show
             System.out.println("\n" +
                 "---------------------------------------------------------"+"\n") ;
         }
 
         System.out.print("Enter the Theatre name:");
-        String theatrename = scanner.nextLine();
+        String theatrename = scanner.nextLine();//get the theatre name
+        for (String keytheatrename : theatreAgainstShow.keySet()) {
+            if(!theatrename.equals(keytheatrename)){
+                System.out.println("Enter correct theatre name:");
+                return;
+            }
+        }
+
         System.out.print("Enter the Show Start Time example:(09:00):");
         LocalTime showtime = LocalTime.parse(scanner.nextLine(),
-                Utilities.getTimeformatter());
-        var showtocheck = theatreAgainstShow.get(theatrename);
-        Show currentshow = null;
+                Utilities.getTimeformatter());//get the show start time 
+        var showtocheck = theatreAgainstShow.get(theatrename);//get the show object
+        Show currentshow = null;//to get the show object of the user entered show
         for (var shows : showtocheck) {
-            if (shows.getStarttime().equals(showtime)) {
-                currentshow = shows;
+            if (shows.getStarttime().equals(showtime)) {//check both the start time are same
+                currentshow = shows;//assagin the current show
 
             }
         }
@@ -177,53 +184,92 @@ public class UserActions {
         if (currentshow == null) {
             System.out.println("Enter the correct details:");
             return;
-        }
+        }//if the show time is wrong
 
-        System.out.println("--------Screen Name-------" + currentshow.getScreen().getName());
-        System.out.println("--------Screen Seats Count-------" + currentshow.getScreen().getNumberofseats());
-        System.out.println("-------------Price"+currentshow.getPrice()+"------------");
-        for (var seats : currentshow.getScreen().getSeatarrangement().entrySet()) {
+        System.out.println("--------Screen Name-------" + currentshow.getScreen().getName());//print the screen name of the show
+        System.out.println("--------Screen Available Seats Count-------" + currentshow.getScreen().getAvailableseats());//show available seats in the show
+        System.out.println("-------------Price"+currentshow.getPrice()+"------------");//price for the ticket
+        for (var seats : currentshow.getSeatarrangement().entrySet()) {
             System.out.println(seats.getKey() + " " + seats.getValue());
-        }
+        }//print the seat to book
 
         System.out.print("Enter the number seats to book:");
-        Long seatcount = Long.parseLong(scanner.nextLine());
-        long finalseatcount=seatcount;
-        ArrayList<String>userseats=new ArrayList<>();
-        HashMap<Character,ArrayList<String>>duplicate=new HashMap<>();
-        for(var clone:currentshow.getScreen().getSeatarrangement().entrySet()){
-            duplicate.put(clone.getKey(),new ArrayList<String>());
-            for(var cloneseats:clone.getValue()){
-                duplicate.get(clone.getKey()).add(cloneseats);
-
-            }
+        Long seatcount = Long.parseLong(scanner.nextLine());//get the number of seats to book
+        long finalseatcount=seatcount;//for printing price
+        ArrayList<String>userseats=new ArrayList<>();//for storing which seats does the user books
+        HashMap<Character,ArrayList<String>>duplicate=new HashMap<>();//for avoing the change if the user gives no while paying
+        for(var duplicateclone:currentshow.getSeatarrangement().entrySet()){
+            duplicate.put(duplicateclone.getKey(), new ArrayList<String>());//store the all the elements from the old object
+            duplicate.get(duplicateclone.getKey()).addAll(duplicateclone.getValue());
         }
-        while (seatcount > 0) {
-            int j = 1;
+        if (currentshow.getScreen().getAvailableseats() < seatcount) {
+            System.out.println("Seats in the screen are not sufficient");
+            System.out.println("The available seats are" + currentshow.getScreen().getAvailableseats());
+            return;
+        }//check entered seats are availabe in the show
+        
+       
+        int j = 1;
+        while (seatcount > 0) {//continue untill the seatcount is 0
+            String grid=currentshow.getScreen().getGrid();
+            var starremoved = grid.split("\\*");
+            long sum = 0;
 
-            if (currentshow.getScreen().getAvailableseats() < seatcount) {
-                System.out.println("Seats in the screen are not sufficient");
-                System.out.println("The available seats are" + currentshow.getScreen().getAvailableseats());
-                return;
-            }
+       
+        for (String a : starremoved) {
+            long temp = Long.parseLong(a);
+            sum += temp;
+        }
+
+           
+           
 
             System.out.print("Enter the row for " + j + " st seat to book example(A1,B1):");
             String choiceseat=scanner.nextLine();
             char row = choiceseat.charAt(0);
-           
+           String bookseat=null;
            
             int seatchoice =Integer.parseInt(choiceseat.substring(1)) ;
-            if (duplicate.get(row).get(seatchoice - 1).equals("<SPACE>")) {
-                seatchoice += 1;
-            }
-            if (duplicate.get(row).get(seatchoice - 1).equals("X")) {
+            
+            
+           if(seatchoice<=Integer.parseInt(starremoved[0])){
+            bookseat=currentshow.getSeatarrangement().get(row).get(seatchoice-1);
+            if (bookseat.equals("X")) {
                 System.out.println(duplicate.get(row));
                 System.out.println("Seat already booked Try any other seats");
                 continue;
             }
-           duplicate.get(row).set(seatchoice - 1, "X");
+            duplicate.get(row).set(seatchoice - 1, "X");
             userseats.add(choiceseat);
             System.out.println(duplicate.get(row));
+           }
+           else if(seatchoice>=((sum+1)-Integer.parseInt(starremoved[2]))){
+            bookseat=currentshow.getSeatarrangement().get(row).get(seatchoice+1);
+            if (bookseat.equals("X")) {
+                System.out.println(duplicate.get(row));
+                System.out.println("Seat already booked Try any other seats");
+                continue;
+            }
+            duplicate.get(row).set(seatchoice + 1, "X");
+            userseats.add(choiceseat);
+            System.out.println(duplicate.get(row));
+           }
+           else if(seatchoice>Integer.parseInt(starremoved[0])){
+            bookseat=currentshow.getSeatarrangement().get(row).get(seatchoice);
+            if (bookseat.equals("X")) {
+                System.out.println(duplicate.get(row));
+                System.out.println("Seat already booked Try any other seats");
+                continue;
+            }
+            duplicate.get(row).set(seatchoice, "X");
+            userseats.add(choiceseat);
+            System.out.println(duplicate.get(row));
+           }
+            
+            
+           
+           
+          
            
            
 
@@ -233,49 +279,49 @@ public class UserActions {
         }
         long totalamount=finalseatcount*currentshow.getPrice();
 
-        System.out.println("The total amount for the ticket is:"+totalamount);
+        System.out.println("The total amount for the ticket is:"+totalamount);//show the total ticket price
         System.out.print("enter the y to confirm the ticket booking or n to exit:");
-        String userchoice=scanner.nextLine();
-        if (userchoice.toLowerCase().equals("y")) {
-            currentshow.getScreen().setAvailableseats(currentshow.getScreen().getAvailableseats()-seatcount);
-            currenUser.getTickets().add(new Ticket(theatrename, currentshow.getShowDate(),currentshow.getScreen().getName() , showtime, finalseatcount,totalamount, userseats,moviechoice));
-            currentshow.getScreen().setSeatarrangement(duplicate);
+        String userchoice=scanner.nextLine();//ask for conformation
+        if (userchoice.toLowerCase().equals("y")) {//yes
+            currentshow.getScreen().setAvailableseats(currentshow.getScreen().getAvailableseats()-seatcount);//reduce the seat count
+            currenUser.getTickets().add(new Ticket(theatrename, currentshow.getShowDate(),currentshow.getScreen().getName() , showtime, finalseatcount,totalamount, userseats,moviechoice));//make the ticket object and pass essential fields
+            currentshow.setSeatarrangement(duplicate);//mark the clone seats to be the original
 
             
 
         }
         else if (userchoice.equals("n") || userchoice.equals("N")) {
             System.out.println("Thank you");
-            return;
+            return;//else return to the function
         }
         
 
 
     }
 
-    public static void changeLocation(User currentuserob) {
+    public static void changeLocation(User currentuserob) {//to change location
 
         System.out.print("Enter The Location To Change:");
-        String locationtochange = scanner.nextLine();
-        currentuserob.setLocation(locationtochange);
+        String locationtochange = scanner.nextLine();//get the input to change location
+        currentuserob.setLocation(locationtochange);//set to user
         return;
 
     }
 
-    public static LocalDate changeDate(User currentuserob) {
+    public static LocalDate changeDate(User currentuserob) {//tp change date
 
         System.out.print("Enter The date To Change:");
         LocalDate dateupdate = LocalDate.parse(scanner.nextLine(), Utilities.getFormatter());
 
-        return dateupdate;
+        return dateupdate;//return the date which is choosen by the user
 
     }
 
 
-    public static void viewtickets(User currentuser){
-        for(var ticket:currentuser.getTickets()){
+    public static void viewtickets(User currentuser){//to dispaly the ticket
+        for(var ticket:currentuser.getTickets()){//get the all tickets object from the currnt user ticket array list
             System.out.println("- - - - - - - - - - - - - - - - - - - - - ");
-            System.out.println("|  Movie name:"+ticket.getMoviename()+"  |");
+            System.out.println("|  Movie name:"+ticket.getMoviename()+"  |");//print the details of the ticket like
             System.out.println("|  Theare name:"+ticket.getTheatrename()+"  |");
             System.out.println("|  Date:"+ticket.getDate()+"  |");
             System.out.println("|  Screen name:"+ticket.getScreen()+"  |");
