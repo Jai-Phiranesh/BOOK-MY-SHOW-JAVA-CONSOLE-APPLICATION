@@ -237,10 +237,10 @@ public class AdminAction {
             System.out.print("Enter the Screen Grid like (2*5*2)*For space:");
             String grid = scanner.nextLine();
             var seatsandgrid = Utilities.generateGrid(numberofseats, grid);//call the utility function and add to screen
-            System.out.println("The Seats Arrangement Of The Theatre is:");
-            for (var entry : seatsandgrid.entrySet()) {
-                System.out.println(entry.getKey() + ": " + entry.getValue());
-            }//print seats pattern
+            // System.out.println("The Seats Arrangement Of The Theatre is:");
+            // for (var entry : seatsandgrid.entrySet()) {
+            //     System.out.println(entry.getKey() + ": " + entry.getValue());
+            // }//print seats pattern
             HashMap<Character,ArrayList<String>>duplicate=new HashMap<>();
         for(var duplicateclone:seatsandgrid.entrySet()){
             duplicate.put(duplicateclone.getKey(), new ArrayList<String>());
