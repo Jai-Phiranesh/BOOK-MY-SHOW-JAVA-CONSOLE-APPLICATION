@@ -30,19 +30,17 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 * Git
 
 # Clone this repository
-git clone https://github.com/JP777-j/BOOK-MY-SHOW-JAVA-CONSOLE-APPLICATION
+git clone https://github.com/yourusername/cinema-central.git
 
 # Navigate to project directory
-cd BOOK-MY-SHOW-JAVA-CONSOLE-APPLICATION
-
-# Create bin directory
-mkdir bin
+cd cinema-central
 
 # Compile the project
 javac -d bin src/*.java
 
 # Run the application
-java -cp bin BookMyShow
+java -cp bin CinemaCentral
+
 
 
 
