@@ -29,6 +29,20 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 * Command Line Interface
 * Git
 
+* ### Installation
+```bash
+# Clone this repository
+git clone https://github.com/yourusername/cinema-central.git
+
+# Navigate to project directory
+cd cinema-central
+
+# Compile the project
+javac -d bin src/*.java
+
+# Run the application
+java -cp bin CinemaCentral
+
 
 
 
