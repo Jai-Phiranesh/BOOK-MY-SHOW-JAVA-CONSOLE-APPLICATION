@@ -24,7 +24,7 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 
 ### Future Enhancements
 * Gui interface
-* Include other shows without movies
+* Include other shows other than movies
 
 ## Getting Started
 
