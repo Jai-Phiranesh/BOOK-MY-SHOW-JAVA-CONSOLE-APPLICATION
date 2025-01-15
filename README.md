@@ -1,7 +1,10 @@
-# Cinema Central - Terminal Movie Booking System
+![Bookmyshowclassstructure](https://github.com/user-attachments/assets/87df274a-c721-423b-9678-bc88e01d8ef9)# Book My Show - Terminal Movie Booking System
 
 ## Overview
-A Java-based terminal application for movie ticket reservations, designed to simulate a real-world cinema booking system. This project demonstrates core OOP concepts, file handling, and user authentication in a console environment.
+A Java-based terminal application for movie ticket reservations, designed to simulate a real-world cinema booking system. This project demonstrates core OOP concepts,and user authentication in a console environment.
+
+### Class Structure
+![Bookmyshowclassstructure](https://github.com/user-attachments/assets/05939d29-ebcc-4c5d-93e9-2c0634b3349e)
 
 ## Key Features
 
@@ -15,8 +18,6 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 * Manage movie listings and schedules
 * Configure theater layouts and seat pricing
 * Monitor booking statistics
-
-## Technical Architecture
 
 ### Core Components
 * User Management System
@@ -33,4 +34,4 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 
 
 
-![class structure](https://github.com/user-attachments/assets/462ab923-8cca-406f-83a3-4c910704a5b2)
+
