@@ -1,4 +1,4 @@
-
+### Book My Show
 ## Overview
 A Java-based terminal application for movie ticket reservations, designed to simulate a real-world cinema booking system. This project demonstrates core OOP concepts,and user authentication in a console environment.
 
