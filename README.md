@@ -32,14 +32,15 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 ## Getting Started
 
 ### Clone the repository:
-```bash
-git clone https://github.com/aswinlegarcon/Java---Console---BookMyShow.git
 
-cd BookMyShow
+git clone https://github.com/JP777-j/BOOK-MY-SHOW-JAVA-CONSOLE-APPLICATION
 
-javac Application.java
+cd Book My Show
 
-java Application
+javac BookMyShowApp.java
+
+java BookMyShowApp
+
 
 
 
