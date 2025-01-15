@@ -3,49 +3,51 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Screen {
-     private String name;//screen name
-    private long numberofseats;//number of seats in that screen
-    private long availableseats=numberofseats;
-    private HashSet<Show> shows = new HashSet<Show>();//show arraylist stores all the show object of that screen
-    private String grid;
+    private  String name;            // screen name
+    private  long numberOfSeats;     // number of seats in that screen
+    private  long availableSeats;   //available seats while booking
+    private  HashSet<Show> shows = new HashSet<>();    // show arraylist stores all the show object of that screen
+    private  String grid;
+    
+    private HashMap<Character, ArrayList<String>> seatArrangement = new HashMap<>();    // seat pattern hash map, row name and seats
 
-
-    public void setAvailableseats(long availableseats) {
-        this.availableseats = availableseats;
-    }
-
-    public long getAvailableseats() {
-        return availableseats;
-    }
-    private  HashMap<Character, ArrayList<String>> seatarrangement = new HashMap<>();//seat pattern hash map ,row name and seats
-   
-    public HashSet<Show> getShows() {
-        return shows;
-    }//getters
-    public  HashMap<Character, ArrayList<String>> getSeatarrangement() {
-        return seatarrangement;
-    }//getters
-
-    public Screen(String name, long numberofseats, HashMap<Character, ArrayList<String>> seats,String grid) {
+    public Screen(String name, long numberOfSeats, HashMap<Character, ArrayList<String>> seats, String grid) {
         this.name = name;
-        this.numberofseats = numberofseats;
-        this.seatarrangement = seats;
-        this.availableseats=numberofseats;
-        this.grid=grid;
-    }//constructors Screen to initialize fields of the class
+        this.numberOfSeats = numberOfSeats;
+        this.seatArrangement = seats;
+        this.availableSeats = numberOfSeats;
+        this.grid = grid;
+    }
 
-    public long getNumberofseats() {
-        return numberofseats;
-    }//getters
-    public String getGrid() {
+    public void setAvailableseats(long availableSeats) {//getters
+        this.availableSeats = availableSeats;
+    }
+
+    public long getAvailableseats() {//getters
+        return availableSeats;
+    }
+
+    public HashSet<Show> getShows() {//getters
+        return shows;
+    }
+
+    public HashMap<Character, ArrayList<String>> getSeatarrangement() {//getters
+        return seatArrangement;
+    }
+
+    public long getNumberofseats() {//getters
+        return numberOfSeats;
+    }
+
+    public String getGrid() {//getters
         return grid;
     }
 
-   
-    public String getName() {
+    public String getName() {//getters
         return name;
-    }//getters
-    public void setSeatarrangement(HashMap<Character, ArrayList<String>> seatarrangement) {
-        this.seatarrangement = seatarrangement;
+    }
+
+    public void setSeatarrangement(HashMap<Character, ArrayList<String>> seatArrangement) {//setters
+        this.seatArrangement = seatArrangement;
     }
 }

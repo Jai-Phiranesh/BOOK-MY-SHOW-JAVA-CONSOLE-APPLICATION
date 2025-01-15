@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
-public class User {//USer pojo class
+public class User {//User pojo class
     private String userid;//user id
     private String password;//user pass
     private String location;//user location
-    private ArrayList<Ticket>tickets=new ArrayList<>();
+    private ArrayList<Ticket>tickets=new ArrayList<>();//store the user tickets
 
 
 
-    public ArrayList<Ticket> getTickets() {
+    public ArrayList<Ticket> getTickets() {//getters
         return tickets;
     }
     public String getLocation() {//getters

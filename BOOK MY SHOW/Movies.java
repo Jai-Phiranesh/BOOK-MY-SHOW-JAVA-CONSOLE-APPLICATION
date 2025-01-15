@@ -1,57 +1,50 @@
 import java.time.LocalDate;
 
-
 public class Movies {
-    String name;
-    //  private ArrayList<Date>moviedate=new ArrayList<>();
-     private Long duration;//duration of the movie
-     private String location;//location of the movie
-     private LocalDate startdate;//date of the movie
-     private Theatre theatreob;//theatre object were the movie added
-     private Screen screenob;//Screen object were the movie added
-     private Show showob;//Show object were the movie added
+    private  String name; // name of the movie
+    // private  Long duration; // duration of the movie
+    private  String location; // location of the movie
+    private  LocalDate startDate;// date of the movie
+    private  Theatre theatre; // theatre object where the movie is added
+    private  Screen screen; // Screen object where the movie is added
+    private  Show show; // Show object where the movie is added
 
-     
+    public Movies(String name,String location, LocalDate startDate,long duration, Theatre theatre,Screen screen, Show show) {
+        this.name = name;
+        // this.duration = duration;
+        this.location = location;
+        this.startDate = startDate;
+        this.theatre = theatre;
+        this.screen = screen;
+        this.show = show;
+    }
 
-
-    public  Movies(String name,String location,LocalDate startdate,long duration,Theatre ob,Screen screenob,Show showob){
-        this.name=name;
-        this.duration=duration;
-        this.startdate=startdate;
-        this.theatreob=ob;
-        this.screenob=screenob;
-        this.showob=showob;
-        this.location=location;
-    }//to initialize fields of the class
-
+    // Getters
     public String getName() {
         return name;
-    }//getters
-    public long getDuration() {
-        return duration;
-    }//getters
-    // public ArrayList<Date> getMoviedate() {
-    //     return moviedate;
+    }
+
+    // public Long getDuration() {
+    // return duration;
     // }
-  
-   public LocalDate getStartdate() {
-       return startdate;
-   }//getters
 
-   public String getLocation() {
-       return location;
-   }//getters
-   public Screen getScreenob() {
-       return screenob;
-   }//getters
-   public Show getShowob() {
-       return showob;
-   }//getters
-   public Theatre getTheatreob() {
-       return theatreob;
-   }//getters
+    public LocalDate getStartdate() {
+        return startDate;
+    }
 
-   
+    public String getLocation() {
+        return location;
+    }
 
-   
+    public Screen getScreenob() {
+        return screen;
+    }
+
+    public Show getShowob() {
+        return show;
+    }
+
+    public Theatre getTheatreob() {
+        return theatre;
+    }
 }
