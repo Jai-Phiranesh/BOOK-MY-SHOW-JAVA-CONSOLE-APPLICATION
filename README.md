@@ -36,7 +36,7 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 
 Clone the repository:
 ```bash
-git clone https://github.com/JP777-j/BOOK-MY-SHOW-JAVA-CONSOLE-APPLICATION
+git clone https://github.com/Jai-Phiranesh/BOOK-MY-SHOW-JAVA-CONSOLE-APPLICATION
 ```
 
 Change Directory
