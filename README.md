@@ -1,4 +1,3 @@
-![Bookmyshowclassstructure](https://github.com/user-attachments/assets/87df274a-c721-423b-9678-bc88e01d8ef9)# Book My Show - Terminal Movie Booking System
 
 ## Overview
 A Java-based terminal application for movie ticket reservations, designed to simulate a real-world cinema booking system. This project demonstrates core OOP concepts,and user authentication in a console environment.
