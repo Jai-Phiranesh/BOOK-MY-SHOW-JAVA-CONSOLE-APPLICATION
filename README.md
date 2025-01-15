@@ -22,6 +22,10 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 * User Management System
 * Movie & Show Scheduler
 
+### Future Enhancements
+*Gui interface
+*Include other shows without movies
+
 ## Getting Started
 
 ### Prerequisites
@@ -29,7 +33,6 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 * Command Line Interface
 * Git
 
-## Getting Started
 
 # Clone the repository:
 ```bash
