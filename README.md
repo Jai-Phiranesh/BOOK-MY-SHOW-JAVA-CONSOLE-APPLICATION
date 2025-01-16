@@ -5,6 +5,9 @@ A Java-based terminal application for movie ticket reservations, designed to sim
 ### Class Structure
 ![Bookmyshowclassstructure](https://github.com/user-attachments/assets/05939d29-ebcc-4c5d-93e9-2c0634b3349e)
 
+## Console Execution
+https://github.com/user-attachments/assets/8433f022-869a-4700-9bae-f13391d59c6b
+
 ## Key Features
 
 ### For Users
