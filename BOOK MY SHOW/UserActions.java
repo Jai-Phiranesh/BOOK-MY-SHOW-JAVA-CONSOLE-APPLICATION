@@ -65,16 +65,16 @@ public class UserActions {
 
     public static void operations(User currentUser) {
 
+
+        UserActions.displayAllMovies(currentUser, Utilities.getToday());// very bigning of the login show the movies
+
         while (true) {
-
-
-            UserActions.displayAllMovies(currentUser, Utilities.getToday());// very bigning of the login show the movies
 
 
             System.out.println("---------------------------------------------------------" + "\n");
             System.out.println("Enter The User Choice...");
             System.out.println(
-                    "------------- 1.Change Location---------------- 2.Change Date ---------------3.view thickets---------------4.Exit ");
+                    "------------- 1.Change Location---------------- 2.Change Date ---------------3.view thickets---------------4.Display Movies--------------5.exit------------------ ");
             System.out.print("Enter the choice:");
             String choice = scanner.nextLine();
             System.out.println("---------------------------------------------------------" + "\n");
@@ -95,7 +95,10 @@ public class UserActions {
                 case "3":// based on the choice call the function (3)
                     UserActions.viewtickets(currentUser);
                     break;
-                case "4":// exit the function and go to previous fumvtion
+                case "4":// based on the choice call the function (4)
+                    UserActions.displayAllMovies(currentUser, Utilities.getToday());
+                    break;
+                case "5":// exit the function and go to previous function
                     return;
             }
         }
@@ -116,28 +119,23 @@ public class UserActions {
 
 
         for (var movies : BookMyShow.getMovieandmovieobj().keySet()) {
-            boolean check = false;
             var moviesarraylist = BookMyShow.getMovieandmovieobj().get(movies);
             for (var movieobject : moviesarraylist) {
                 // Check and display the movies based on the location and date
                 if (movieobject.getLocation().equals(currentuser.getLocation()) && (movieobject.getStartdate().isEqual(today))) {
-                    check = true;
+                    System.out.println("->" + movies);
+                moviesinthatlocation.add(movies);
 
                 }
 
             }
-
-
-            if (check) {// to check the movies and print the movie only availabe in that location and  date
-                        
-                System.out.println("->" + movies);
-                moviesinthatlocation.add(movies);
-            } else {// to print no movies in that location or date
-                System.out.println("\n" + "No movies in your location or date try some other date or location" + "\n");
-                return;
-            }
-
         }
+        if(moviesinthatlocation.isEmpty()){
+            System.out.println("No movies in your location or date");
+            return;
+        }
+
+        
         moviename:while(true){
         
         System.out.print("Enter the movie name to book or press (n) to exit the option:");
@@ -196,16 +194,18 @@ public class UserActions {
         System.out.print("Enter the Theatre name:");
          theatrename = scanner.nextLine();// get the theatre name
         for (String keytheatrename : theatreAgainstShow.keySet()) {
-            if (!theatrename.equals(keytheatrename)) {//check the user entered theatre name is valid or not
-                System.out.print("Incorrect theatre name Enter again (y) or press (N) to exit:");
+            if (theatrename.equals(keytheatrename)) {
+                break theatre;//check the user entered theatre name is valid or not
+                
+            }}
+            System.out.print("Incorrect theatre name Enter again (y) or press (N) to exit:");
                 String choice = scanner.nextLine();
                 if (choice.toLowerCase().equals("n")) {
                     return;
                 }
                 continue theatre;
-            }
            
-        }break;}
+        }
 
 
         Show currentshow = null;// to get the show object of the user entered show
@@ -221,9 +221,10 @@ public class UserActions {
         for (var shows : showtocheck) {//to get the particular show
             if (shows.getStarttime().equals(showtime)) {// check the user entered show time is valid or not
                 currentshow = shows;// assagin the current show
+                break show;
 
-            }
-            else {
+            }}
+           
                 System.out.print("Incorrect show time Enter again (y) or press (N) to exit:");//if not ask another try
                 String choice = scanner.nextLine();
                 if (choice.toLowerCase().equals("n")) {
@@ -231,9 +232,9 @@ public class UserActions {
                 }
                 continue show;
     
-            }
-        }
-    break show;
+            
+        
+   
 
 }
 
@@ -301,6 +302,10 @@ public class UserActions {
             String bookseat = null;// to check the seat  is already booked or not
 
             int seatchoice = Integer.parseInt(choiceseat.substring(1));// seat number
+            if(seatchoice>sum){
+                System.out.println("enter correct seat number");
+                continue ;
+            }
 
             if (seatchoice <= Integer.parseInt(starremoved[0])) {// if seatnumber is less or equal to first grid
                 bookseat = duplicate.get(row).get(seatchoice - 1);// get the -1 (because no seat)
@@ -314,7 +319,9 @@ public class UserActions {
                   System.out.println(duplicate.get(row));// to print the selected seat
             
             
-            } else if (seatchoice >= ((sum + 1) - Integer.parseInt(starremoved[2]))) {// If seatNumber is greater than or equal to sum + 1 and minus the last grid size to calculate the seat after the second seat
+            }
+            
+             else if (seatchoice >= ((sum + 1) - Integer.parseInt(starremoved[2]))) {// If seatNumber is greater than or equal to sum + 1 and minus the last grid size to calculate the seat after the second seat
                 bookseat = duplicate.get(row).get(seatchoice + 1);
                 if (bookseat.equals("X")) {// check the bookseat is X or not
                     System.out.println(duplicate.get(row));// if x

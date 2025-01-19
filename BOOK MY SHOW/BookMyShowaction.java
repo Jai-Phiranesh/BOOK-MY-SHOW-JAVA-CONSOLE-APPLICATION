@@ -5,7 +5,7 @@ public class BookMyShowaction {
     public static Scanner scanner = new Scanner(System.in);
     public static void start() {
      
-        BookMyShow.getAdminlist().add(new Admin("1", "1"));//added the default admin pass and id to admin list
+        BookMyShow.getAdminlist().add(new Admin("admin", "123"));//added the default admin pass and id to admin list
 
         System.out.println("-------------------------");
         System.out.println("        WELCOMME         ");
@@ -40,7 +40,6 @@ public class BookMyShowaction {
                         } else if (currentUser.getUserid() == null) {//password attempts reached
                             System.out.println("Wrong password:");
                         } else {
-                            UserActions.displayAllMovies(currentUser, Utilities.getToday());//after login display all movies
                             UserActions.operations( currentUser);//success of login
                         }       break;
                     }

@@ -9,15 +9,15 @@ public class Show {// show pojo class
     private LocalTime endTime;// endtime of show
     private long price;
     private LocalDate showDate;// show date
-    private String movieName;// name of the movie in that time
+   
     private Screen screen;
     private HashMap<Character, ArrayList<String>> seatArrangement = new HashMap<>();// seat pattern hash map, row name and seats
 
-    public Show(LocalTime startTime, LocalTime endTime, LocalDate showDate, String movieName, Screen screen,long price, HashMap<Character, ArrayList<String>> seatArrangement) {
+    public Show(LocalTime startTime, LocalTime endTime, LocalDate showDate,  Screen screen,long price, HashMap<Character, ArrayList<String>> seatArrangement) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.showDate = showDate;
-        this.movieName = movieName;
+       
         this.screen = screen;
         this.price = price;
         this.seatArrangement = seatArrangement;
@@ -31,9 +31,7 @@ public class Show {// show pojo class
         return price;
     }
 
-    public String getMoviename() {
-        return movieName;
-    }
+    
 
     public LocalTime getEndtime() {
         return endTime;

@@ -91,17 +91,15 @@ public class AdminAction {
             for (var theatreObjects :theatreInThatLocation) {// check the input theatre name is correct or already exists in that location
                 if (theatreObjects.getTheatrename().equals(choiceTheatre)) {
                     currentTheatre=theatreObjects;
-                    break;
-                } else {
-                    System.out.print("Incorrect theatre name Enter again (y) or press (N) to exit:");
+                    break theatre;
+                }} 
+                    System.out.print("Incorrect theatre name Enter again by pressing any key or press (N) to exit:");
                     String choice = scanner.nextLine();
                     if (choice.toLowerCase().equals("n")) {
                         return;
                     }
                     continue theatre;
-                }
-            }
-            break;// break while
+                
         }
 
         Screen currentScreen = null;// store current screen
@@ -112,22 +110,25 @@ public class AdminAction {
             }
 
             System.out.print("Enter Screen Name:");
-            String choiceScreen = scanner.nextLine();
+            String choiceScreen = scanner.nextLine();//get the screen name
 
             for (String screen : currentTheatre.getScreenNameandScreenObject().keySet()) {// check the entered screen is in theatre
                 if (screen.equals(choiceScreen)) {
                     currentScreen = currentTheatre.getScreenNameandScreenObject().get(screen);
-                    break;
-                } else {
-                    System.out.print("Incorrect Screen name Enter again or press (N) to exit:");//to reenter the choice
-                    String choice = scanner.nextLine();
-                    if (choice.toLowerCase().equals("n")) {
-                        return;
-                    }
-                    continue screen;
+                    break screen ;
                 }
             }
-            break;
+            
+                System.out.print("Incorrect Screen name Enter by pressing any key or press (N) to exit:");//to reenter the choice
+                String choice = scanner.nextLine();
+                if (choice.toLowerCase().equals("n")) {
+                    return;
+                }
+                continue screen;
+            
+            
+
+           
         }
 
         show: while(true) {
@@ -144,66 +145,54 @@ public class AdminAction {
 
             if (currentScreen.getShows().isEmpty()) {// if show class is empty add directly
                 currentShow = new Show(choiceStartTime, choiceStartTime.plusMinutes(choiceDuration + 30),
-                        dateStart, movieName, currentScreen, price, currentScreen.getSeatarrangement());
-                currentScreen.getShows().add(currentShow);
+                        dateStart, currentScreen, price, currentScreen.getSeatarrangement());//create new show object
+                currentScreen.getShows().add(currentShow);//add to the arraylist
                 if (!BookMyShow.getMovieandmovieobj().containsKey(movieName)) {
                     BookMyShow.getMovieandmovieobj().put(movieName, new ArrayList<Movies>());
-                }
+                }//if new movie name add the arraylist of movie object
                 BookMyShow.getMovieandmovieobj().get(movieName).add(new Movies(movieName, movieLocation, dateStart,
-                        choiceDuration, currentTheatre, currentScreen, currentShow));
+                        choiceDuration, currentTheatre, currentScreen, currentShow));//add to the movie arraylist
                 System.out.println("added successfully");
                 return;
             }
 
             for (Show show : currentScreen.getShows()) {// if show is already there
-                currentShow = show;
-
-                if (!show.getShowDate().isEqual(dateStart)) {//if the shows doest have the date which user enetred 
-                    currentShow = new Show(choiceStartTime, choiceStartTime.plusMinutes(choiceDuration + 30),
-                        dateStart, movieName, currentScreen, price, currentScreen.getSeatarrangement());
-                    currentScreen.getShows().add(currentShow);
-
-                    if (!BookMyShow.getMovieandmovieobj().containsKey(movieName)) {
-                        BookMyShow.getMovieandmovieobj().put(movieName, new ArrayList<Movies>());
-                    }
-
-                    BookMyShow.getMovieandmovieobj().get(movieName).add(new Movies(movieName, movieLocation, dateStart,
-                    choiceDuration, currentTheatre, currentScreen, currentShow));
-                    System.out.println("added successfully");
-                    break show;
-                }
-
-
+               
 
                 //if there is a show already in that particular date check the timing
+                if (show.getShowDate().isEqual(dateStart)) {
                 if ((choiceStartTime.isBefore(show.getStarttime()) || choiceStartTime.isAfter(show.getEndtime()))
-                        && (endTime.isBefore(show.getStarttime()) || endTime.isAfter(show.getEndtime()))) {
+                        && (endTime.isBefore(show.getStarttime()) || endTime.isAfter(show.getEndtime()))) {//check the timing of the show already exists or not
 
                     currentShow = new Show(choiceStartTime, choiceStartTime.plusMinutes(choiceDuration + 30),
-                            dateStart, movieName, currentScreen, price, currentScreen.getSeatarrangement());// Store in the show object
-                    if (currentScreen.getShows().contains(currentShow)) {
-                        System.out.print("show already exists Enter again(y) or press (N) to exit:");
+                            dateStart, currentScreen, price, currentScreen.getSeatarrangement());// Store in the show object
+                    if (currentScreen.getShows().contains(currentShow)) {//check for same show already exists or not
+                        System.out.print("show already exists Enter again(y) or press (N) to exit:");//to reenter
                         String choice = scanner.nextLine();
                         if (choice.toLowerCase().equals("n")) {
                             return;
                         }
                         continue show;
                     }
-                    currentScreen.getShows().add(currentShow);
-
-                    BookMyShow.getMovieandmovieobj().get(movieName)
-                            .add(new Movies(movieName, movieLocation, dateStart,
-                                    choiceDuration, currentTheatre, currentScreen, currentShow));
-                    System.out.println("added successfully");
-                    return;
                 } else {
                     System.out.print("show already exists Enter again(y) or press (N) to exit:");//to reenter the choice
                     String choice = scanner.nextLine();
                     if (choice.toLowerCase().equals("n")) {
                         return;
                     }
-                    continue show;
-                }
+                    continue show;}}
+                    if (!BookMyShow.getMovieandmovieobj().containsKey(movieName)) {//if new movie name add the arraylist of movie object
+                        BookMyShow.getMovieandmovieobj().put(movieName, new ArrayList<Movies>());
+                    }
+                    currentScreen.getShows().add(currentShow);//add to the arraylist
+
+                    BookMyShow.getMovieandmovieobj().get(movieName)
+                            .add(new Movies(movieName, movieLocation, dateStart,
+                                    choiceDuration, currentTheatre, currentScreen, currentShow));//add to the movie arraylist
+                    System.out.println("added successfully");
+                    return;
+                
+                
             }
             break;
         }
