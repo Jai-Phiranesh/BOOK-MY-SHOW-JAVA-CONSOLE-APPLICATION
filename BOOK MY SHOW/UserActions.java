@@ -89,6 +89,10 @@ public class UserActions {
                     break;
                 case "2":// based on the choice call the function (2)
                     LocalDate dateUpdate = UserActions.changeDate(currentUser);
+                    if(dateUpdate==null){
+                        System.out.println("Cant go the past date....");
+                        continue;
+                    }
                     UserActions.displayAllMovies(currentUser, dateUpdate);// after the change in the date show the  movies
                                                                          
                     break;
@@ -119,15 +123,20 @@ public class UserActions {
 
 
         for (var movies : BookMyShow.getMovieandmovieobj().keySet()) {
+            boolean check=false;
             var moviesarraylist = BookMyShow.getMovieandmovieobj().get(movies);
             for (var movieobject : moviesarraylist) {
                 // Check and display the movies based on the location and date
                 if (movieobject.getLocation().equals(currentuser.getLocation()) && (movieobject.getStartdate().isEqual(today))) {
-                    System.out.println("->" + movies);
+                    check=true;
                 moviesinthatlocation.add(movies);
+                break;
 
                 }
 
+            }
+            if(check){
+                System.out.println("->" + movies);
             }
         }
         if(moviesinthatlocation.isEmpty()){
@@ -385,6 +394,11 @@ public class UserActions {
 
         System.out.print("Enter The date To Change:");
         LocalDate dateupdate = LocalDate.parse(scanner.nextLine(), Utilities.getFormatter());
+        if(dateupdate.isBefore(Utilities.getToday())){
+           
+            return null;
+        }//to avoid the case of adding movie in the past
+        
 
         return dateupdate;// return the date which is choosen by the user
 

@@ -60,15 +60,22 @@ public class AdminAction {
         String movieLocation = scanner.nextLine();
         System.out.print("Enter  Date:");// get the date as input
 
+        
+
         LocalDate dateStart = LocalDate.parse(scanner.nextLine(), Utilities.getFormatter());// LocalDate class used and formatted the date as in utilities
         boolean checkTheatreinThatlocation = false;// number of theatre in that locations
+
+        if(dateStart.isBefore(Utilities.getToday())){
+            System.out.println("Cant Add the Movie for the Past");
+            return;
+        }//to avoid the case of adding movie in the past
         
         ArrayList<Theatre> theatreInThatLocation=new ArrayList<>();
         for (String theatreName : BookMyShow.getTheatreandtheatreobj().keySet()) {
             Theatre theatreInLocation = BookMyShow.getTheatreandtheatreobj().get(theatreName);// get theatre object 
-
+            System.out.println("Theatres in the location you entered are..");
             if (theatreInLocation.getLocation().equals(movieLocation)) {//check the theatres in that location
-                System.out.println("Theatres in the location you entered are..");
+                
                
                 System.out.println("->" + theatreInLocation.getTheatrename());
                 theatreInThatLocation.add(theatreInLocation);
@@ -229,14 +236,14 @@ public class AdminAction {
         System.out.print("Enter The Location of Theatre :");
         String theatreLocation = scanner.nextLine();// get location of theatre
         
-        for (String existingTheatreName : BookMyShow.getTheatreandtheatreobj().keySet()) {//check the theatre name in that locaton is already exists
-            Theatre currentTheatre = BookMyShow.getTheatreandtheatreobj().get(existingTheatreName);
+        //check the theatre name in that locaton is already exists
             
-            if (existingTheatreName.equals(theatreName) && currentTheatre.getLocation().equals(theatreLocation)) {
+            
+            if (BookMyShow.getTheatreandtheatreobj().containsKey(theatreLocation)) {
                 System.out.println("Theatre Already exists in that Location....");
                 return;
             }
-        }
+        
 
         Theatre currentTheatreAdding = new Theatre(theatreLocation, theatreName);
 
@@ -272,6 +279,10 @@ public class AdminAction {
     }
 
     public static void viewalltheatre() {//print all the theatres that are added
+        if(BookMyShow.getTheatreandtheatreobj().isEmpty()){
+            System.out.println("No theatre...");
+            return;
+        }
         for (String theatreName : BookMyShow.getTheatreandtheatreobj().keySet()) {
             System.out.println("---------------------------------------------------------\n");
             Theatre theatre = BookMyShow.getTheatreandtheatreobj().get(theatreName);
