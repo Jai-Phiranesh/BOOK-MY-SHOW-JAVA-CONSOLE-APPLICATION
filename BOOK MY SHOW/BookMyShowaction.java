@@ -5,7 +5,7 @@ public class BookMyShowaction {
     public static Scanner scanner = new Scanner(System.in);
     public static void start() {
      
-        BookMyShow.getAdminlist().add(new Admin("admin", "123"));//added the default admin pass and id to admin list
+        BookMyShow.getAccountList().add(new Admin("admin", "123"));//added the default admin pass and id to admin list
 
         System.out.println("-------------------------");
         System.out.println("        WELCOMME         ");
@@ -24,23 +24,23 @@ public class BookMyShowaction {
             switch (choice) {
                 case "1"://for admin login
                     {
-                        Admin result = AdminAction.login();
+                        Account result = AdminAction.login();
                         if (result == null) {//no account
                             System.out.println("INVALID ADMIN DETAILS OR WRONG PASSWORD:");
                         } else {
-                            AdminAction.operations( result);//success of login
+                            AdminAction.operations( (Admin)result);//success of login
                         }       break;
                     }
                 case "2"://user login
                     {
-                        User currentUser = UserActions.login();
+                        Account currentUser = UserActions.login();
                         if (currentUser == null) {//no account
                             UserActions.register();
                             
-                        } else if (currentUser.getUserid() == null) {//password attempts reached
+                        } else if (currentUser.getId() == null) {//password attempts reached
                             System.out.println("Wrong password:");
                         } else {
-                            UserActions.operations( currentUser);//success of login
+                            UserActions.operations( (User)currentUser);//success of login
                         }       break;
                     }
                 case "3":

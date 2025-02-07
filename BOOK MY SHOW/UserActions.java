@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class UserActions {
     public static Scanner scanner = new Scanner(System.in);
 
-    public static User login() {// perform the login action of the user
+    public static Account login() {// perform the login action of the user
 
         System.out.print("Enter The Username:");
         String userIdInput = scanner.nextLine();// get user name
@@ -16,16 +16,17 @@ public class UserActions {
         String userPasswordInput = scanner.nextLine();// get password
 
 
-        for (User temp : BookMyShow.getUseList()) {// get user arraylist
-            if (temp.getUserid().equals(userIdInput)) {// check every object id and pass
-                if (temp.getPassword().equals(userPasswordInput)) {
+        for (Account temp : BookMyShow.getAccountList()) {// get user arraylist
+            if(temp instanceof User){
+            if (temp.getId().equals(userIdInput)) {// check every object id and pass
+                if (temp.getPass().equals(userPasswordInput)) {
                     return temp;// if matches return the current user object
                 } else {
                     return new User(null, null, null);// for wrong pass return object with null values
                 }
             }
 
-        }
+        }}
 
 
         return null;// no account pass null
@@ -48,7 +49,7 @@ public class UserActions {
             System.out.print("ARE YOU SURE TO REGISTER (Y/N):");// ask conformation to register with this detatils
             String userConformation = scanner.nextLine();
             if (userConformation.toLowerCase().equals("y")) {
-                BookMyShow.getUseList().add(new User(useridinput, password, userlocation));
+                BookMyShow.getAccountList().add(new User(useridinput, password, userlocation));
                                // if yes add in user array list with the input fields 
                                                                                        
             } else if (userConformation.toLowerCase().equals("n")) {

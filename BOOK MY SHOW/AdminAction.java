@@ -6,18 +6,19 @@ import java.util.Scanner;
 public class AdminAction {
     private static  Scanner scanner = new Scanner(System.in);
 
-    public static Admin login() {
+    public static Account login() {
         System.out.print("Enter The Username:");// get usernmae
         String userId = scanner.nextLine();
         System.out.print("Enter The Password:");// get password
         String passwordInput = scanner.nextLine();
-        for (Admin admin : BookMyShow.getAdminlist()) {// check the id and pass
-            if (admin.getUserid().equals(userId)) {
-                if (admin.getPassword().equals(passwordInput)) {
+        for (Account admin : BookMyShow.getAccountList()) {// check the id and pass
+            if(admin instanceof Admin){
+            if (admin.getId().equals(userId)) {
+                if (admin.getPass().equals(passwordInput)) {
                     return admin;// current admin object for successfull login
                 }
             }
-        }
+        }}
         return null;
     }
 
